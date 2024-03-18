@@ -1,0 +1,89 @@
+- id: 12
+  primaryImage: DALL·E 2024-03-15 13.45.22 - A cat samurai wielding a katana, dressed in traditional armor, standing amidst cherry blossoms in full bloom
+  title: The Samurai Cat
+  subtitle: Blossoms of Battle
+  detail: A fierce samurai cat brandishing a katana, adorned in ancient armor, amidst a serene backdrop of cherry blossoms in full bloom.
+  secondaryImage: DALL·E 2024-03-15 13.45.22 - A cat samurai wielding a katana, dressed in traditional armor, standing amidst cherry blossoms in full bloom
+  currency: £
+  amount: 15
+  endTime: 2024-04-01T18:00:00+00:00
+
+- id: 13
+  primaryImage: DALL·E 2024-03-15 13.45.35 - A cat scientist conducting experiments in a laboratory, wearing a lab coat and safety goggles, surrounded by bubbling beakers and scientific equ
+  title: The Scientist Cat
+  subtitle: Laboratory Genius
+  detail: A diligent scientist cat conducting experiments in a laboratory, donning a lab coat and safety goggles, amidst bubbling beakers and scientific apparatus.
+  secondaryImage: DALL·E 2024-03-15 13.45.35 - A cat scientist conducting experiments in a laboratory, wearing a lab coat and safety goggles, surrounded by bubbling beakers and scientific equ
+  currency: £
+  amount: 10
+  endTime: 2024-04-01T18:05:00+00:00
+
+- id: 14
+  primaryImage: DALL·E 2024-03-15 13.45.48 - A cat rockstar performing on stage, holding a microphone and rocking out with a crowd cheering in the background, lights flashing all around
+  title: The Rockstar Cat
+  subtitle: Feline Rocker
+  detail: A charismatic rockstar cat taking center stage, gripping a microphone, rocking out amidst a cheering crowd, with dazzling lights illuminating the scene.
+  secondaryImage: DALL·E 2024-03-15 13.45.48 - A cat rockstar performing on stage, holding a microphone and rocking out with a crowd cheering in the background, lights flashing all around
+  currency: £
+  amount: 18
+  endTime: 2024-04-01T18:10:00+00:00
+
+- id: 15
+  primaryImage: DALL·E 2024-03-15 13.45.58 - A cat cowboy riding a bucking bronco in a rodeo arena, wearing a cowboy hat and boots, with dust kicking up around them
+  title: The Cowboy Cat
+  subtitle: Rodeo Rider
+  detail: A daring cowboy cat riding a bucking bronco in a rodeo arena, sporting a cowboy hat and boots, surrounded by swirling dust and adrenaline-fueled excitement.
+  secondaryImage: DALL·E 2024-03-15 13.45.58 - A cat cowboy riding a bucking bronco in a rodeo arena, wearing a cowboy hat and boots, with dust kicking up around them
+  currency: £
+  amount: 25
+  endTime: 2024-04-01T18:15:00+00:00
+
+- id: 16
+  primaryImage: DALL·E 2024-03-15 13.46.08 - A cat mermaid lounging on a rocky shore, with a fish tail and seashells adorning their hair, gazing pensively at the distant horizon
+  title: The Mermaid Cat
+  subtitle: Ocean Serenade
+  detail: A mystical mermaid cat reclining on a rocky shore, adorned with a shimmering fish tail and seashell accessories, gazing wistfully at the endless ocean.
+  secondaryImage: DALL·E 2024-03-15 13.46.08 - A cat mermaid lounging on a rocky shore, with a fish tail and seashells adorning their hair, gazing pensively at the distant horizon
+  currency: £
+  amount: 30
+  endTime: 2024-04-01T18:20:00+00:00
+
+- id: 17
+  primaryImage: DALL·E 2024-03-15 13.46.20 - A cat wizard conjuring spells in a mystical forest, wearing a pointed hat and holding a glowing staff, with magical creatures peeking from b
+  title: The Forest Wizard Cat
+  subtitle: Enchanted Realm
+  detail: A mystical wizard cat weaving spells in an enchanted forest, adorned in a pointed hat and wielding a shimmering staff, with curious magical creatures observing.
+  secondaryImage: DALL·E 2024-03-15 13.46.20 - A cat wizard conjuring spells in a mystical forest, wearing a pointed hat and holding a glowing staff, with magical creatures peeking from b
+  currency: £
+  amount: 22
+  endTime: 2024-04-01T18:25:00+00:00
+
+- id: 18
+  primaryImage: DALL·E 2024-03-15 13.46.32 - A cat surfer riding a wave on a sunny beach, with a surfboard under their paws and seagulls flying overhead
+  title: The Surfer Cat
+  subtitle: Wave Rider
+  detail: A cool surfer cat catching waves on a sun-drenched beach, balancing effortlessly on a surfboard with seagulls soaring overhead, embodying the spirit of coastal adventure.
+  secondaryImage: DALL·E 2024-03-15 13.46.32 - A cat surfer riding a wave on a sunny beach, with a surfboard under their paws and seagulls flying overhead
+  currency: £
+  amount: 27
+  endTime: 2024-04-01T18:30:00+00:00
+
+- id: 19
+  primaryImage: DALL·E 2024-03-15 13.46.45 - A cat ballet dancer performing on stage, wearing a tutu and ballet shoes, executing a graceful arabesque with elegance and poise
+  title: The Ballet Cat
+  subtitle: Graceful Enchantress
+  detail: A mesmerizing ballet dancer cat taking the stage, adorned in a delicate tutu and ballet slippers, performing a flawless arabesque with unmatched grace and poise.
+  secondaryImage: DALL·E 2024-03-15 13.46.45 - A cat ballet dancer performing on stage, wearing a tutu and ballet shoes, executing a graceful arabesque with elegance and poise
+  currency: £
+  amount: 35
+  endTime: 2024-04-01T18:35:00+00:00
+
+- id: 20
+  primaryImage: DALL·E 2024-03-15 13.46.57 - A cat firefighter battling flames in a burning building, wearing a helmet and carrying a fire hose, with smoke billowing around them
+  title: The Firefighter Cat
+  subtitle: Courage Under Fire
+  detail: A heroic firefighter cat bravely combating flames in a blazing building, clad in protective gear with a helmet secured, wielding a powerful fire hose amidst swirling smoke.
+  secondaryImage: DALL·E 2024-03-15 13.46.57 - A cat firefighter battling flames in a burning building, wearing a helmet and carrying a fire hose, with smoke billowing around them
+  currency: £
+  amount: 40
+  endTime: 2024-04-01T18:40:00+00:00
