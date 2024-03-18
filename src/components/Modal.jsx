@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { itemStatus } from "../utils/itemStatus";
 import { formatField, formatMoney } from "../utils/formatString";
-import { updateProfile } from "firebase/auth";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { updateProfile, signInWithEmailAndPassword } from "firebase/auth"; // Added signInWithEmailAndPassword
+import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore"; // Added getDoc
 import { auth, db } from "../firebase/config";
 import { ModalsContext } from "../contexts/ModalsProvider";
 import { ModalTypes } from "../utils/modalTypes";
@@ -47,9 +48,9 @@ const ItemModal = () => {
   const { activeItem, openModal, closeModal } = useContext(ModalsContext);
   const [secondaryImageSrc, setSecondaryImageSrc] = useState("");
   const minIncrease = 1;
-  const [bid, setBid] = useState();
+  const [bid, setBid] = useState("");
   const [valid, setValid] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [minBid, setMinBid] = useState("-.--");
 
@@ -87,7 +88,7 @@ const ItemModal = () => {
       return;
     }
     // Ensure user has provided a username
-    if (auth.currentUser.displayName == null) {
+    if (!auth.currentUser.displayName) {
       setFeedback("You must provide a username before bidding!");
       setValid("is-invalid");
       setTimeout(() => {
@@ -138,6 +139,28 @@ const ItemModal = () => {
     }
   };
 
+  const handleSignIn = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // Check if user is admin
+        const userDocRef = doc(db, "users", user.uid);
+        getDoc(userDocRef).then((docSnap) => {
+          if (docSnap.exists() && docSnap.data().admin) {
+            console.debug("User is admin");
+            // Set admin state or redirect to admin panel, etc.
+          }
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(errorCode, errorMessage);
+        // Handle sign-in errors
+      });
+  };
+
   return (
     <Modal type={ModalTypes.ITEM} title={activeItem.title}>
       <div className="modal-body">
@@ -171,52 +194,104 @@ const ItemModal = () => {
 
 const SignUpModal = () => {
   const { closeModal } = useContext(ModalsContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [valid, setValid] = useState("");
+  const [validEmail, setValidEmail] = useState("");
+  const [validPassword, setValidPassword] = useState("");
+  const [validUsername, setValidUsername] = useState("");
 
   const handleSignUp = () => {
-    const user = auth.currentUser;
-    updateProfile(user, { displayName: username });
-    setDoc(doc(db, "users", user.uid), { name: username, admin: "" });
-    console.debug(`signUp() write to users/${user.uid}`);
-    setValid("is-valid");
-    setTimeout(() => {
-      closeModal();
-      setValid("");
-    }, 1000);
+    // Validate email, password, and username
+    if (!validateEmail(email) || password.length < 6 || !username.trim()) {
+      // Show validation errors if any
+      setValidEmail(validateEmail(email) ? "" : "is-invalid");
+      setValidPassword(password.length >= 6 ? "" : "is-invalid");
+      setValidUsername(username.trim() ? "" : "is-invalid");
+      return;
+    }
+
+    // Create user with email and password
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Update user profile with username
+        const user = userCredential.user;
+        return updateProfile(user, {
+          displayName: username
+        });
+      })
+      .then(() => {
+        // Store additional user info in Firestore
+        return setDoc(doc(db, "users", auth.currentUser.uid), {
+          name: username,
+          admin: false // Initially set as non-admin
+        });
+      })
+      .then(() => {
+        console.debug(`SignUpModal: User signed up successfully.`);
+        // Close modal on successful signup
+        closeModal();
+      })
+      .catch((error) => {
+        // Handle signup errors
+        console.error(`SignUpModal: Error signing up: ${error.code} - ${error.message}`);
+        // You can display appropriate error messages to the user
+      });
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSignUp();
-    }
+  const validateEmail = (email) => {
+    // Simple email validation regex
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
   return (
     <Modal type={ModalTypes.SIGN_UP} title="Sign up for Markatplace Auction">
       <div className="modal-body">
         <p>
-          We use anonymous authentication provided by Google. Your account is
-          attached to your device signature.
+          Please enter your email, password, and username to sign up.
         </p>
-        <p>The username just lets us know who&apos;s bidding!</p>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="form-floating mb-3">
             <input
               autoFocus
+              id="email-input"
+              type="email"
+              className={`form-control ${validEmail}`}
+              placeholder="name@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label>Email</label>
+            <div className="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+          <div className="form-floating mb-3">
+            <input
+              id="password-input"
+              type="password"
+              className={`form-control ${validPassword}`}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <label>Password</label>
+            <div className="invalid-feedback">Password must be at least 6 characters long.</div>
+          </div>
+          <div className="form-floating mb-3">
+            <input
               id="username-input"
-              type="username"
-              className={`form-control ${valid}`}
+              type="text"
+              className={`form-control ${validUsername}`}
+              placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              onKeyDown={handleKeyDown}
             />
             <label>Username</label>
+            <div className="invalid-feedback">Please enter a username.</div>
           </div>
         </form>
       </div>
       <div className="modal-footer">
-        <button type="button" className="btn btn-secondary">
+        <button type="button" className="btn btn-secondary" onClick={closeModal}>
           Cancel
         </button>
         <button
